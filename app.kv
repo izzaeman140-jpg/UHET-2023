@@ -1,0 +1,87 @@
+#: import FadeTransition kivy.uix.screenmanager.FadeTransition
+
+ScreenManagement:
+    transition: FadeTransition()
+    MainScreen:
+    DrawScreen:
+       
+
+<MainScreen>:
+    name: "main"
+    
+    BoxLayout:
+        orientation: "vertical"
+        Image:
+            source: 'Alphabets (1).png'
+            allow_stretch: True
+            keep_ratio: False
+            
+                   
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint: 1, 0.1
+            
+            Button:
+                on_release: app.root.current = "draw"
+                text: "Draw"
+                font_size: 20
+                size_hint: 0.5, 1
+                pos_hint: {"bottom": 0}
+            Button:
+                on_release: root.exit_app()
+                font_size: 20
+                text: "Exit"
+                size_hint: 0.5, 1
+                pos_hint: {"bottom": 1}
+<DrawScreen>:
+    name: "draw"
+    BoxLayout:
+        orientation: "vertical"
+        AnchorLayout:
+            anchor_x: "right"
+            anchor_y: "top"
+            size_hint: 0.2, 0.2
+            BoxLayout:
+                orientation: "vertical"
+                Image:
+                    id: image
+                    source: "logo.jpg"
+                    size_hint: 1, 0.3
+                    allow_stretch: True
+                    keep_ratio: True
+               
+        Painter
+            id: painter
+        BoxLayout:
+            size_hint: 1, 0.1
+            pos_hint: {"bottom": 1}
+            Button:
+                color: 0,1,0,1
+                background_color: 0.5,0.5,0.5,0.5
+                font_size: 20
+                on_press: app.root.current = "main"
+                text: "Back"
+                size_hint: 0.2,1
+            Button:
+                color: 0,1,0,1
+                background_color: 0.5,0.5,0.5,0.5
+                font_size: 20
+                on_press: root.change_image()
+                text: "Dictate the Alphabets"
+                size_hint: 0.2,1
+            
+            Button:
+                color: 0,1,0,1
+                background_color: 0.5,0.5,0.5,0.5
+                font_size: 20
+                on_release: root.recognize_handwriting()
+                text: 'check stroke order'
+                size_hint: 0.2,1        
+            Button:
+                color: 0,1,0,1
+                background_color: 0.5,0.5,0.5,0.5
+                font_size: 20
+                on_press: root.on_release_clear()
+                text: "Clear"
+                size_hint: 0.2,1
+
